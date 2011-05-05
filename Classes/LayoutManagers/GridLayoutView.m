@@ -3,7 +3,6 @@
 //  LayoutManagers
 //
 //  Created by James Roome on 3/15/11.
-//  Copyright 2011 SpiderLogic. All rights reserved.
 //
 
 #import "GridLayoutView.h"
