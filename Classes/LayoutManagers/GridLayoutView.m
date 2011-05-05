@@ -39,8 +39,8 @@
 
     //row widths are going to be equal
     //determine col width: loop through subviews and find widest col
-    int total_height = topMargin, max_width = 0;
-    int total_width = leftMargin, max_height = 0;
+    int total_height = self.topMargin, max_width = 0;
+    int total_width = self.leftMargin, max_height = 0;
     for (UIView *child in self.subviews) {
         max_height = MAX(max_height, child.frame.size.height);
         max_width = MAX(max_width, child.frame.size.width);
@@ -53,8 +53,8 @@
     total_width += max_width * _cols;
 
     //spacing
-    total_height += (_rows - 1) * spacing + bottomMargin;
-    total_width += (_cols - 1) * spacing + rightMargin;
+    total_height += (_rows - 1) * self.spacing + self.bottomMargin;
+    total_width += (_cols - 1) * self.spacing + self.rightMargin;
 
     //actually do the layout
     if (effectively == YES) {
@@ -76,10 +76,14 @@
         // S  = Spacing (Padding)
         //
         int viewNumber = 0; //which view are we on
-        int y = topMargin;
-        int x = leftMargin;
+        int y = self.topMargin;
+        int x = self.leftMargin;
         for(int row=0; row<_rows; row++) {
             for(int col=0; col<_cols; col++) {
+                //the grid may have more cells than subViews
+                if(viewNumber >= [self.subviews count] ) {
+                    continue;
+                }
                 //get the next child view we're going to layout
                 UIView *child = [self.subviews objectAtIndex:viewNumber++];
                 
@@ -87,14 +91,14 @@
                 child.frame = CGRectMake(x, y, child.frame.size.width, child.frame.size.height);
 
                 //move to the right
-                x += max_width + spacing;
+                x += max_width + self.spacing;
             }
             
             //reset the left count
-            x = leftMargin;
+            x = self.leftMargin;
 
             //move down
-            y += max_height + spacing;
+            y += max_height + self.spacing;
         }
     }
         

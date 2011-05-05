@@ -1,10 +1,10 @@
 @interface AbstractLayoutView : UIScrollView
 {
-    int spacing;
-    int leftMargin, rightMargin;
-    int topMargin, bottomMargin;
-    UIControlContentHorizontalAlignment hAlignment;
-    UIControlContentVerticalAlignment vAlignment;
+    int _spacing;
+    int _leftMargin, _rightMargin;
+    int _topMargin, _bottomMargin;
+    UIControlContentHorizontalAlignment _hAlignment;
+    UIControlContentVerticalAlignment _vAlignment;
 }
 
 - (id)init;
@@ -33,5 +33,13 @@
 - (void)scrollToShow:(UIView *)subview animated:(BOOL)animated;
 
 - (CGSize)layoutSubviewsEffectively:(BOOL)effectively;
+
+@property (nonatomic) int spacing;
+@property (nonatomic) int leftMargin;
+@property (nonatomic) int rightMargin;
+@property (nonatomic) int topMargin;
+@property (nonatomic) int bottomMargin;
+@property (nonatomic) UIControlContentHorizontalAlignment hAlignment;
+@property (nonatomic) UIControlContentVerticalAlignment vAlignment;
 
 @end

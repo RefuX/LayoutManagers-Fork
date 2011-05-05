@@ -2,6 +2,14 @@
 
 @implementation AbstractLayoutView
 
+@synthesize spacing = _spacing;
+@synthesize leftMargin = _leftMargin;
+@synthesize rightMargin = _rightMargin;
+@synthesize topMargin = _topMargin;
+@synthesize bottomMargin = _bottomMargin;
+@synthesize hAlignment = _hAlignment;
+@synthesize vAlignment = _vAlignment;
+
 - (id)init
 {
     return [self initWithFrame:CGRectZero spacing:0
@@ -40,15 +48,15 @@
     hAlignment:(UIControlContentHorizontalAlignment)ha
     vAlignment:(UIControlContentVerticalAlignment)va
 {
-    if (self = [super initWithFrame:frame])
+    if ((self = [super initWithFrame:frame]))
     {
-        spacing = s;
-        leftMargin = lm;
-        rightMargin = rm;
-        topMargin = tm;
-        bottomMargin = bm;
-        hAlignment = ha;
-        vAlignment = va;
+        self.spacing = s;
+        self.leftMargin = lm;
+        self.rightMargin = rm;
+        self.topMargin = tm;
+        self.bottomMargin = bm;
+        self.hAlignment = ha;
+        self.vAlignment = va;
         
         self.scrollEnabled = NO;
     }
@@ -83,12 +91,12 @@
 
 - (int)availableWidth
 {
-    return self.frame.size.width - leftMargin - rightMargin;
+    return self.frame.size.width - self.leftMargin - self.rightMargin;
 }
 
 - (int)availableHeight
 {
-    return self.frame.size.height - topMargin - bottomMargin;
+    return self.frame.size.height - self.topMargin - self.bottomMargin;
 }
 
 - (void)scrollToShow:(UIView *)subview animated:(BOOL)animated
@@ -117,17 +125,17 @@
     self.showsVerticalScrollIndicator = showsVerticalScrollIndicator;
     CGFloat overflowLeft = 0, overflowTop = 0;
     if (self.frame.size.width < contentSize.width
-        && hAlignment != UIControlContentHorizontalAlignmentLeft)
+        && self.hAlignment != UIControlContentHorizontalAlignmentLeft)
     {
-        if (hAlignment == UIControlContentHorizontalAlignmentRight)
+        if (self.hAlignment == UIControlContentHorizontalAlignmentRight)
             overflowLeft = contentSize.width - self.frame.size.width;
         else // center
             overflowLeft = (contentSize.width - self.frame.size.width) / 2;
     }
     if (self.frame.size.height < contentSize.height
-        && vAlignment != UIControlContentVerticalAlignmentTop)
+        && self.vAlignment != UIControlContentVerticalAlignmentTop)
     {
-        if (vAlignment == UIControlContentVerticalAlignmentBottom)
+        if (self.vAlignment == UIControlContentVerticalAlignmentBottom)
             overflowTop = contentSize.height - self.frame.size.height;
         else // center
             overflowTop = (contentSize.height - self.frame.size.height) / 2;

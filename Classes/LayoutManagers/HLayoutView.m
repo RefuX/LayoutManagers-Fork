@@ -4,41 +4,41 @@
 
 - (CGSize)layoutSubviewsEffectively:(BOOL)effectively
 {
-    int total_width = leftMargin, max_height = 0;
+    int total_width = self.leftMargin, max_height = 0;
     for (UIView *child in self.subviews)
     {
         total_width += child.frame.size.width;
         if (max_height < child.frame.size.height)
             max_height = child.frame.size.height;
     }
-    total_width += ([self.subviews count] - 1) * spacing + rightMargin;
+    total_width += ([self.subviews count] - 1) * self.spacing + self.rightMargin;
     if (effectively == YES)
     {
-        int left, top, baseline = (self.frame.size.height - topMargin
-                                   - bottomMargin) / 2 + topMargin;
-        switch (hAlignment)
+        int left, top, baseline = (self.frame.size.height - self.topMargin
+                                   - self.bottomMargin) / 2 + self.topMargin;
+        switch (self.hAlignment)
         {
             case UIControlContentHorizontalAlignmentLeft:
-                left = leftMargin;
+                left = self.leftMargin;
                 break;
             case UIControlContentHorizontalAlignmentRight:
-                left = self.frame.size.width - total_width + leftMargin;
+                left = self.frame.size.width - total_width + self.leftMargin;
                 break;
             default: // center
-                left = self.frame.size.width / 2 - total_width / 2 + leftMargin;
+                left = self.frame.size.width / 2 - total_width / 2 + self.leftMargin;
                 break;
         }
-        left -= spacing;
+        left -= self.spacing;
         for (UIView *child in self.subviews)
         {
-            left += spacing;
-            switch (vAlignment)
+            left += self.spacing;
+            switch (self.vAlignment)
             {
                 case UIControlContentVerticalAlignmentTop:
-                    top = topMargin;
+                    top = self.topMargin;
                     break;
                 case UIControlContentVerticalAlignmentBottom:
-                    top = self.frame.size.height - bottomMargin
+                    top = self.frame.size.height - self.bottomMargin
                         - child.frame.size.height;
                     break;
                 default: // center
@@ -50,7 +50,7 @@
             left += child.frame.size.width;
         }
     }
-    return CGSizeMake(total_width, topMargin + max_height + bottomMargin);
+    return CGSizeMake(total_width, self.topMargin + max_height + self.bottomMargin);
 }
 
 @end

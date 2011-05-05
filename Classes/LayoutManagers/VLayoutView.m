@@ -4,41 +4,41 @@
 
 - (CGSize)layoutSubviewsEffectively:(BOOL)effectively
 {
-    int total_height = topMargin, max_width = 0;
+    int total_height = self.topMargin, max_width = 0;
     for (UIView *child in self.subviews)
     {
         total_height += child.frame.size.height;
         if (max_width < child.frame.size.width)
             max_width = child.frame.size.width;
     }
-    total_height += ([self.subviews count] - 1) * spacing + bottomMargin;
+    total_height += ([self.subviews count] - 1) * self.spacing + self.bottomMargin;
     if (effectively == YES)
     {
-        int left, top, baseline = (self.frame.size.width - leftMargin
-                                   - rightMargin) / 2 + leftMargin;
-        switch (vAlignment)
+        int left, top, baseline = (self.frame.size.width - self.leftMargin
+                                   - self.rightMargin) / 2 + self.leftMargin;
+        switch (self.vAlignment)
         {
             case UIControlContentVerticalAlignmentTop:
-                top = topMargin;
+                top = self.topMargin;
                 break;
             case UIControlContentVerticalAlignmentBottom:
-                top = self.frame.size.height - total_height + topMargin;
+                top = self.frame.size.height - total_height + self.topMargin;
                 break;
             default: // center
-                top = self.frame.size.height / 2 - total_height / 2 + topMargin;
+                top = self.frame.size.height / 2 - total_height / 2 + self.topMargin;
                 break;
         }
-        top -= spacing;
+        top -= self.spacing;
         for (UIView *child in self.subviews)
         {
-            top += spacing;
-            switch (hAlignment)
+            top += self.spacing;
+            switch (self.hAlignment)
             {
                 case UIControlContentHorizontalAlignmentLeft:
-                    left = leftMargin;
+                    left = self.leftMargin;
                     break;
                 case UIControlContentHorizontalAlignmentRight:
-                    left = self.frame.size.width - rightMargin
+                    left = self.frame.size.width - self.rightMargin
                         - child.frame.size.width;
                     break;
                 default: // center
@@ -50,7 +50,7 @@
             top += child.frame.size.height;
         }
     }
-    return CGSizeMake(leftMargin + max_width + rightMargin, total_height);
+    return CGSizeMake(self.leftMargin + max_width + self.rightMargin, total_height);
 }
 
 @end
